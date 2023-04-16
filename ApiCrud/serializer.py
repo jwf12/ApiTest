@@ -1,6 +1,19 @@
 from rest_framework import serializers
-from .models import Tarea
-class TareaSerializer(serializers.ModelSerializer):
+from .models import Passanger, Room
+
+# class TareaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Tarea
+#         fields = ('__all__')
+
+
+class PassangerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tarea
+        model = Passanger
+        fields = ('__all__')
+
+
+class RoomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Room
         fields = ('__all__')
