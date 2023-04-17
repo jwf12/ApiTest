@@ -2,6 +2,8 @@ from rest_framework import generics
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from .serializer import PassangerSerializer, RoomSerializer
 from .models import Passanger, Room
 
@@ -21,11 +23,14 @@ from .models import Passanger, Room
 # Passanger views.
 
 class CreatePassenger(generics.ListCreateAPIView):
+    queryset = Passanger.objects.all()
     serializer_class = PassangerSerializer
-
+    
 class ListPassanger(generics.ListAPIView):
     serializer_class = PassangerSerializer
     queryset = Passanger.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^name', '^dni']
 
 class DeletePassanger(generics.RetrieveDestroyAPIView):
     serializer_class = PassangerSerializer
@@ -34,6 +39,14 @@ class DeletePassanger(generics.RetrieveDestroyAPIView):
 class UpdatePassenger(generics.RetrieveUpdateAPIView):
     serializer_class = PassangerSerializer
     queryset = Passanger.objects.all()
+
+#Passenger search using django-filter
+class SearchPassenger(generics.ListAPIView):
+    queryset = Passanger.objects.all()
+    serializer_class = PassangerSerializer    
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id','name', 'dni']
+
 
 
 # Room views.

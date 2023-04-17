@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreatePassenger, ListPassanger, DeletePassanger, UpdatePassenger, CreateRoom, ListRoom, DeleteRoom, UpdateRoom, RoomDirty, RoomClean, OccuRoom
+from .views import CreatePassenger, ListPassanger, DeletePassanger, UpdatePassenger, CreateRoom, ListRoom, DeleteRoom, UpdateRoom, RoomDirty, RoomClean, OccuRoom, SearchPassenger
 
 urlpatterns = [
     #Passengers views:
@@ -7,6 +7,7 @@ urlpatterns = [
     path('listP/', ListPassanger.as_view(), name='list-pass'),
     path('deleteP/<int:pk>', DeletePassanger.as_view(), name='delete-pass'),
     path('updateP/<int:pk>', UpdatePassenger.as_view(), name='update-pass'),
+    path('searchP/', SearchPassenger.as_view()),
 
     #Room views:
     path('createR/', CreateRoom.as_view(), name = 'create-Room'),
